@@ -1,21 +1,34 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import Welcome from "../views/Welcome.vue";
+import PageNotFound from "../views/PageNotFound.vue";
+import store from "@/store";
 
 const routes = [
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: Home,
+    beforeEnter: (to, from, next) => {
+      // TODO give them some OOPS! not logged in message
+      if (store.getters["getSelectedHouse"]) {
+        next();
+      } else {
+        next("/");
+      }
+    },
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: "/",
+    name: "Welcome",
+    component: Welcome,
   },
+  {
+    path: "/join/:id",
+    name: "Join",
+    component: Welcome,
+  },
+  { path: "/:pathMatch(.*)*", component: PageNotFound },
 ];
 
 const router = createRouter({

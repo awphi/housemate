@@ -1,0 +1,26 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@font-face {
+  font-family: "Midpoint Pro Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Midpoint Pro Regular"),
+    url(~@/assets/fonts/midpoint-pro-regular.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Midpoint Pro Oblique";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Midpoint Pro Oblique"),
+    url(~@/assets/fonts/midpoint-pro-oblique.woff) format("woff");
+}
+
+a {
+  cursor: pointer;
+  user-select: none;
+}
