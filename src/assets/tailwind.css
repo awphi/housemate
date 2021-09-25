@@ -24,3 +24,15 @@ a {
   cursor: pointer;
   user-select: none;
 }
+
+.input-base {
+  @apply bg-secondary border-2 border-primary text-header rounded-md pl-1 pr-1 pt-1 pb-1;
+}
+
+.hr-base {
+  @apply w-full mt-4 mb-4 opacity-5;
+}
+
+.button-base {
+  @apply p-2 rounded-md text-header;
+}

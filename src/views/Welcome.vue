@@ -15,48 +15,34 @@
         shadow
       "
     >
-      <h1 class="text-5xl text-header mb-1">HouseMate</h1>
+      <h1 class="hr-base">HouseMate</h1>
       <small class="text-header opacity-50"
         >Welcome to HouseMate, let's get started!</small
       >
-      <hr class="w-full mt-8 mb-4 opacity-5" />
+      <hr class="hr-base" />
       <div class="w-full ml-1 mr-1 flex flex-col">
         <h2 class="text-left w-full text-header text-2xl">Got a house code?</h2>
-        <o-input
+        <input
           v-model="joinCode"
-          class="
-            bg-secondary
-            border-2 border-primary
-            text-header
-            mb-2
-            mt-2
-            w-full
-          "
+          class="input-base mb-2 mt-2"
           placeholder="Code"
-        ></o-input>
+        />
         <a
           class="text-header text-right w-full underline"
           @click="onJoinHouseClick"
           >Join →</a
         >
       </div>
-      <hr class="w-full mt-4 mb-4 opacity-5" />
+      <hr class="hr-base" />
       <div class="w-full ml-1 mr-1 flex flex-col">
         <h2 class="text-left w-full text-header text-2xl">
           Creating a new house?
         </h2>
-        <o-input
+        <input
           v-model="newHouseName"
-          class="
-            bg-secondary
-            border-2 border-primary
-            text-header
-            mb-2
-            mt-2
-            w-full
-          "
+          class="input-base mb-2 mt-2"
           placeholder="House name"
-        ></o-input>
+        />
         <a
           class="text-header text-right w-full underline"
           @click="onCreateHouseClick"

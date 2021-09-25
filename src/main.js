@@ -4,8 +4,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-import "@oruga-ui/oruga-next/dist/oruga-full.css";
-import { Switch, Field, Button, Input } from "@oruga-ui/oruga-next";
 import "./assets/tailwind.css";
 
 import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
@@ -39,6 +37,5 @@ const appCheck = initializeAppCheck(app, {
 const app = createApp(App);
 
 app.use(store).use(router);
-app.use(Switch).use(Field).use(Button).use(Input);
 
 app.mount("#app");
