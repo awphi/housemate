@@ -9,6 +9,9 @@ html,
 body,
 #app {
   height: 100%;
+}
+
+html * {
   font-family: "Midpoint Pro Regular";
   font-weight: normal;
 }

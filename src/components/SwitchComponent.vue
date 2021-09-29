@@ -45,6 +45,11 @@
         </svg>
       </Switch>
     </div>
+    <TimePickerModal
+      :isOpen="isModalOpen"
+      @close="modalClosed"
+      @confirm="modalConfirmed"
+    />
   </div>
 </template>
 
@@ -52,19 +57,29 @@
 import { Switch } from "@headlessui/vue";
 import { getDatabase, ref, update } from "firebase/database";
 import { mapGetters } from "vuex";
+import TimePickerModal from "./TimePickerModal.vue";
 
 export default {
-  mounted() {},
+  data() {
+    return {
+      awaitingTimerLength: false,
+      commit: null,
+      isModalOpen: false,
+      timerModalLength: 0,
+    };
+  },
   computed: {
     timeLeft() {
-      return this.toHHMMSS(
-        this.switch.timer_start + this.switch.timer_length - this.now
-      );
+      const a = this.switch.timer_start + this.switch.timer_length - this.now;
+      if (a <= 0 && this.switch.enabled) {
+        this.onSwitchToggle();
+      }
+      return a;
     },
     smallText() {
       var base = this.switch.lastEnabled;
       if (this.switch.timed) {
-        base += ` | ${this.timeLeft} remaining`;
+        base += ` | ${this.toHHMMSS(this.timeLeft)} remaining`;
       }
 
       return base;
@@ -72,17 +87,42 @@ export default {
   },
   methods: {
     ...mapGetters(["getSelectedHouse"]),
-    onSwitchToggle() {
-      const db = getDatabase();
-      const data = {};
-      // eslint-disable-next-line no-extra-boolean-cast
-      const b = !this.switch.enabled;
+    modalClosed() {
+      this.isModalOpen = false;
+      this.commit = null;
+    },
+    modalConfirmed(secs) {
+      if (secs <= 0) {
+        this.modalClosed();
+        return;
+      }
 
+      this.commit[`switches/${this.index}/timer_start`] = Math.round(
+        Date.now() / 1000
+      );
+      this.commit[`switches/${this.index}/timer_length`] = secs;
+
+      this.updateRemote(this.commit);
+      this.modalClosed();
+    },
+    onSwitchToggle() {
+      const data = {};
+      const b = !this.switch.enabled;
       data[`switches/${this.index}/enabled`] = b;
+
       if (b) {
         data[`switches/${this.index}/lastEnabled`] = this.$store.state.username;
       }
 
+      if (this.switch.timed && b) {
+        this.commit = data;
+        this.isModalOpen = true;
+      } else {
+        this.updateRemote(data);
+      }
+    },
+    updateRemote(data) {
+      const db = getDatabase();
       update(ref(db, this.getSelectedHouse()), data);
     },
     toHHMMSS(sec_num) {
@@ -104,6 +144,7 @@ export default {
   },
   components: {
     Switch,
+    TimePickerModal,
   },
   props: ["index", "switch", "now"],
 };

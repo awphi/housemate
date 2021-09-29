@@ -69,7 +69,6 @@ export default {
 
       const db = getDatabase();
       get(ref(db, this.joinCode)).then((snapshot) => {
-        console.log(snapshot.exists());
         if (snapshot.exists()) {
           if (this.hasHouse(this.joinCode)) {
             this.$router.push("/home");
