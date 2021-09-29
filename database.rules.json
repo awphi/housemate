@@ -1,6 +1,10 @@
 {
   "rules": {
-    ".read": true,
-    ".write": false
+    ".read": false,
+    ".write": true,
+    "$child": {
+      ".read": true,
+      ".write": false
+    }
   }
 }

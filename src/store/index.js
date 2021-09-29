@@ -19,6 +19,10 @@ const store = createStore({
     setUsername(state, name) {
       state.username = name;
     },
+    leaveHouse(state) {
+      state.houses.splice(state.selectedHouse, 1);
+      state.selectedHouse = 0;
+    },
     initialiseStore(state) {
       // Check if the ID exists
       if (localStorage.getItem("store")) {

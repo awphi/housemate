@@ -36,3 +36,11 @@ a {
 .button-base {
   @apply p-2 rounded-md text-header;
 }
+
+.switch-base {
+  @apply rounded-full cursor-pointer focus:outline-none;
+}
+
+.switch-ball-base {
+  @apply transform ring-0 transition ease-in-out duration-200 pointer-events-none inline-block;
+}

@@ -8,14 +8,13 @@
         absolute
         bg-main
         p-4
-        pb-5
+        py-10
         w-4/5
-        h-3/5
         rounded-md
         shadow
       "
     >
-      <h1 class="hr-base">HouseMate</h1>
+      <h1 class="text-4xl text-header mb-1">HouseMate</h1>
       <small class="text-header opacity-50"
         >Welcome to HouseMate, let's get started!</small
       >

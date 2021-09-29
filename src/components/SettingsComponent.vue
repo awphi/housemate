@@ -14,7 +14,7 @@
     >
       <h1 class="text-header text-4xl mb-4">Settings</h1>
       <div class="flex flex-col w-5/6">
-        <p class="text-header whitespace-nowrap">Display Name:</p>
+        <p class="text-header mb-1 whitespace-nowrap">Display Name:</p>
         <input
           v-model="newName"
           class="input-base w-full"
@@ -28,7 +28,9 @@
         </button>
       </div>
       <hr class="hr-base" />
-      <button class="bg-red-600 button-base">Leave House</button>
+      <button class="bg-red-600 button-base" @click="onLeaveHouseClick">
+        Leave House
+      </button>
     </div>
   </div>
 </template>
@@ -38,12 +40,17 @@ import { mapMutations } from "vuex";
 
 export default {
   methods: {
-    ...mapMutations(["setUsername"]),
+    ...mapMutations(["setUsername", "leaveHouse"]),
     onConfirmChanges() {
       if (this.newName.length > 0) {
         this.setUsername(this.newName);
         this.newName = "";
       }
+    },
+    onLeaveHouseClick() {
+      // TODO confirm with a modal?
+      this.leaveHouse();
+      this.$router.go();
     },
   },
   data() {
