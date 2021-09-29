@@ -46,6 +46,7 @@
       </Switch>
     </div>
     <TimePickerModal
+      v-if="this.switch.timed"
       :isOpen="isModalOpen"
       @close="modalClosed"
       @confirm="modalConfirmed"
@@ -62,10 +63,8 @@ import TimePickerModal from "./TimePickerModal.vue";
 export default {
   data() {
     return {
-      awaitingTimerLength: false,
       commit: null,
       isModalOpen: false,
-      timerModalLength: 0,
     };
   },
   computed: {

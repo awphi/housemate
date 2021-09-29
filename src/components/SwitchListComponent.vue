@@ -16,7 +16,8 @@ import SwitchComponent from "./SwitchComponent.vue";
 export default {
   data() {
     return {
-      now: 0,
+      now: Math.round(Date.now() / 1000),
+      interval: null,
     };
   },
   methods: {
@@ -25,7 +26,11 @@ export default {
     },
   },
   created() {
-    setInterval(this.updateNow.bind(this), 1000);
+    console.log("open");
+    this.interval = setInterval(this.updateNow.bind(this), 1000);
+  },
+  beforeUnmount() {
+    clearInterval(this.interval);
   },
   components: {
     SwitchComponent,
