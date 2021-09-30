@@ -55,12 +55,9 @@
         </svg>
       </Switch>
     </div>
-    <TimePickerModal
-      v-if="this.switch.timed"
-      :isOpen="isModalOpen"
-      @close="modalClosed"
-      @confirm="modalConfirmed"
-    />
+    <modal v-if="this.switch.timed" v-model:isOpen="isModalOpen">
+      <time-picker @confirm="timerLengthConfirmed" />
+    </modal>
   </div>
 </template>
 
@@ -68,7 +65,8 @@
 import { Switch } from "@headlessui/vue";
 import { getDatabase, ref, update } from "firebase/database";
 import { mapGetters } from "vuex";
-import TimePickerModal from "./TimePickerModal.vue";
+import TimePicker from "./TimePicker.vue";
+import Modal from "./Modal.vue";
 
 export default {
   data() {
@@ -96,15 +94,10 @@ export default {
   },
   methods: {
     ...mapGetters(["getSelectedHouse"]),
-    modalClosed() {
-      console.log("closing modal");
-      this.isModalOpen = false;
-      this.commit = null;
-    },
-    modalConfirmed(secs) {
+    timerLengthConfirmed(secs) {
       console.log("modal confirmed");
       if (secs <= 0) {
-        this.modalClosed();
+        this.isModalOpen = false;
         return;
       }
 
@@ -114,7 +107,7 @@ export default {
       this.commit[`switches/${this.index}/timer_length`] = secs;
 
       this.updateRemote(this.commit);
-      this.modalClosed();
+      this.isModalOpen = false;
     },
     onSwitchToggle() {
       const data = {};
@@ -156,7 +149,8 @@ export default {
   },
   components: {
     Switch,
-    TimePickerModal,
+    TimePicker,
+    Modal,
   },
   props: ["index", "switch", "now"],
 };

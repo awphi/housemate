@@ -110,13 +110,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.swiper-slide {
-  @apply flex;
-}
-
-.swiper-pagination-bullet-active {
-  @apply bg-primary !important;
-}
-</style>

@@ -48,3 +48,11 @@ a {
 .modal-base {
   @apply fixed inset-0 items-center justify-center flex flex-col bg-black bg-opacity-30 z-10;
 }
+
+.swiper-slide {
+  @apply flex;
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-primary !important;
+}
