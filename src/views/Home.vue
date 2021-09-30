@@ -2,7 +2,7 @@
   <div class="h-full flex flex-col items-center">
     <div class="flex items-center">
       <h1 class="text-header text-3xl mb-1 mr-3">{{ activeHouse.name }}</h1>
-      <button @click="onHouseMenuClicked">
+      <button v-touch:tap="onHouseMenuClicked">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="white"

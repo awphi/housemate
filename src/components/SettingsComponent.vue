@@ -22,13 +22,13 @@
       />
       <button
         class="button-base mt-4 bg-primary w-fit-content self-center"
-        @click="onConfirmChanges"
+        v-touch:tap="onConfirmChanges"
       >
         Confirm changes
       </button>
     </div>
     <hr class="hr-base" />
-    <button class="bg-red-600 button-base" @click="onLeaveHouseClick">
+    <button class="bg-red-600 button-base" v-touch:tap="onLeaveHouseClick">
       Leave House
     </button>
   </div>

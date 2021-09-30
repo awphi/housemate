@@ -10,7 +10,7 @@
       leaveTo="opacity-0"
       class="modal-base"
       as="div"
-      @click="onClicked"
+      v-touch:tap="onClicked"
     >
       <div class="w-4/5 p-6 my-8 align-middle transform bg-main rounded-2xl">
         <h1 class="text-2xl text-header">Set Timer</h1>
@@ -29,7 +29,7 @@
 
         <button
           class="bg-primary rounded-md p-2 w-full text-header"
-          @click="
+          v-touch:tap="
             $emit('confirm', selections[0] * 60 * 60 + selections[1] * 60)
           "
         >
