@@ -26,7 +26,6 @@ export default {
     },
   },
   created() {
-    console.log("open");
     this.interval = setInterval(this.updateNow.bind(this), 1000);
   },
   beforeUnmount() {

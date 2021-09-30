@@ -10,7 +10,7 @@
       leaveTo="opacity-0"
       class="modal-base"
       as="div"
-      v-touch:tap="onClicked"
+      @click="onExit"
     >
       <div class="w-4/5 p-6 my-8 align-middle transform bg-main rounded-2xl">
         <h1 class="text-2xl text-header">Set Timer</h1>
@@ -29,9 +29,7 @@
 
         <button
           class="bg-primary rounded-md p-2 w-full text-header"
-          v-touch:tap="
-            $emit('confirm', selections[0] * 60 * 60 + selections[1] * 60)
-          "
+          @click="onConfirmed"
         >
           Confirm
         </button>
@@ -60,10 +58,16 @@ export default {
     },
   },
   methods: {
-    onClicked(e) {
+    onExit(e) {
       if (e.target === e.currentTarget) {
         this.$emit("close");
       }
+    },
+    onConfirmed() {
+      this.$emit(
+        "confirm",
+        this.selections[0] * 3600 + this.selections[1] * 60
+      );
     },
   },
   emits: ["close", "confirm"],

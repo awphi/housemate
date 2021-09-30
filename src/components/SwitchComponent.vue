@@ -22,7 +22,7 @@
         :checked="this.switch.enabled"
         class="switch-base w-20 h-10 relative inline-flex items-center"
         :class="this.switch.enabled ? 'bg-green-600' : 'bg-gray-700'"
-        v-touch:tap="onSwitchToggle"
+        @click="onSwitchToggle"
       >
         <span className="sr-only">Toggle {{ this.switch.name }}</span>
         <span
@@ -97,10 +97,12 @@ export default {
   methods: {
     ...mapGetters(["getSelectedHouse"]),
     modalClosed() {
+      console.log("closing modal");
       this.isModalOpen = false;
       this.commit = null;
     },
     modalConfirmed(secs) {
+      console.log("modal confirmed");
       if (secs <= 0) {
         this.modalClosed();
         return;
@@ -125,6 +127,7 @@ export default {
 
       if (this.switch.timed && b) {
         this.commit = data;
+        console.log("opening modal");
         this.isModalOpen = true;
       } else {
         this.updateRemote(data);

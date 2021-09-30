@@ -28,7 +28,7 @@
         />
         <a
           class="text-header text-right w-full underline"
-          v-touch:tap="onJoinHouseClick"
+          @click="onJoinHouseClick"
           >Join →</a
         >
       </div>
@@ -44,7 +44,7 @@
         />
         <a
           class="text-header text-right w-full underline"
-          v-touch:tap="onCreateHouseClick"
+          @click="onCreateHouseClick"
           >Create →</a
         >
       </div>

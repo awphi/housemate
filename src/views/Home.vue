@@ -2,7 +2,7 @@
   <div class="h-full flex flex-col items-center">
     <div class="flex items-center">
       <h1 class="text-header text-3xl mb-1 mr-3">{{ activeHouse.name }}</h1>
-      <button v-touch:tap="onHouseMenuClicked">
+      <button @click="onHouseMenuClicked">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="white"
@@ -20,31 +20,24 @@
         </svg>
       </button>
     </div>
-    <small class="text-header opacity-50"
+    <small
+      :slides-per-view="1"
+      :space-between="50"
+      class="text-header opacity-50"
       >Welcome, {{ this.$store.state.username }}!</small
     >
-    <Carousel class="flex flex-col w-full h-full">
-      <Slide index="1">
-        <div class="carousel__item">
-          <!-- <p class="text-2xl text-header">Switches</p> -->
-          <SwitchListComponent :switches="activeHouse.switches" />
-        </div>
-      </Slide>
-      <Slide index="2">
-        <div class="carousel__item">
-          <p class="text-2xl text-header">Notes</p>
-        </div>
-      </Slide>
-      <Slide index="3">
-        <div class="carousel__item">
-          <SettingsComponent />
-        </div>
-      </Slide>
-
-      <template #addons>
-        <Pagination />
-      </template>
-    </Carousel>
+    <Swiper :pagination="true" class="w-full h-full">
+      <SwiperSlide>
+        <!-- <p class="text-2xl text-header">Switches</p> -->
+        <SwitchListComponent :switches="activeHouse.switches" />
+      </SwiperSlide>
+      <SwiperSlide>
+        <p class="text-2xl w-full self-center text-center text-header">Notes</p>
+      </SwiperSlide>
+      <SwiperSlide>
+        <SettingsComponent />
+      </SwiperSlide>
+    </Swiper>
   </div>
 </template>
 
@@ -53,17 +46,21 @@ import { mapGetters, mapMutations } from "vuex";
 import { getDatabase, ref, onValue } from "firebase/database";
 import SettingsComponent from "@/components/SettingsComponent";
 import SwitchListComponent from "@/components/SwitchListComponent";
+import { Swiper, SwiperSlide } from "swiper/vue";
 
-import { Carousel, Pagination, Slide } from "vue3-carousel";
+import "swiper/swiper-bundle.min.css";
 
-import "vue3-carousel/dist/carousel.css";
+// import Swiper core and required modules
+import SwiperCore, { Pagination } from "swiper";
+
+// install Swiper modules
+SwiperCore.use([Pagination]);
 
 export default {
   name: "Home",
   components: {
-    Carousel,
-    Slide,
-    Pagination,
+    Swiper,
+    SwiperSlide,
     SettingsComponent,
     SwitchListComponent,
   },
@@ -100,9 +97,6 @@ export default {
       },
     };
   },
-  mounted() {
-    document.querySelector(".carousel__pagination-item > button").click();
-  },
   created() {
     // Listen to selecting a different house so we can resub to a different firebase doc
     this.$store.subscribe((mutation) => {
@@ -118,33 +112,11 @@ export default {
 </script>
 
 <style>
-.carousel__prev,
-.carousel__next {
-  box-sizing: content-box;
-  border: 5px solid white;
+.swiper-slide {
+  @apply flex;
 }
 
-.carousel__item {
-  @apply flex justify-center w-full h-full;
-}
-
-.carousel__slide {
-  padding: 10px;
-}
-
-.carousel__track {
-  @apply h-full;
-}
-
-.carousel__viewport {
-  @apply flex-1;
-}
-
-.carousel__pagination-button--active {
+.swiper-pagination-bullet-active {
   @apply bg-primary !important;
-}
-
-.carousel__pagination-button {
-  @apply bg-main;
 }
 </style>

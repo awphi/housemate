@@ -1,7 +1,6 @@
 module.exports = {
   purge: {
     content: ["./public/**/*.html", "./src/**/*.vue"],
-    whitelistPatterns: [/^carousel/],
   },
   darkMode: false, // or 'media' or 'class'
   important: true,
