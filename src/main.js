@@ -6,7 +6,13 @@ import store from "./store";
 
 import "./assets/tailwind.css";
 
-import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+import { Capacitor } from "@capacitor/core";
+import {
+  initializeAppCheck,
+  ReCaptchaV3Provider,
+  CustomProvider,
+} from "firebase/app-check";
+import { AppCheck } from "capacitor-firebase-appcheck";
 
 import { initializeApp } from "firebase/app";
 
@@ -26,8 +32,34 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 
+// initialise AppCheck
+
+var provider;
+if (Capacitor.getPlatform() === "web") {
+  provider = new ReCaptchaV3Provider(
+    "6Le1p4ocAAAAAK2z8D8JhxbkXyq2OBRmGe9GdmFk"
+  );
+} else {
+  AppCheck.initialize({
+    // enable debugging if in staging or dev environments. Default is false.
+    debug: process.env.NODE_ENV === "development",
+  });
+  // create custom appcheck provider
+  provider = {
+    getToken: async () => {
+      // get the token from native
+      const { token, exp: expTimeMillis } = await AppCheck.getAppCheckToken();
+
+      return {
+        token,
+        expTimeMillis,
+      };
+    },
+  };
+}
+
 const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider("6Le1p4ocAAAAAK2z8D8JhxbkXyq2OBRmGe9GdmFk"),
+  provider: provider,
 
   // Optional argument. If true, the SDK automatically refreshes App Check
   // tokens as needed.

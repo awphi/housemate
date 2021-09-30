@@ -1,0 +1,6 @@
+{
+  "appId": "ph.adamw.housemate",
+  "appName": "HouseMate",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
