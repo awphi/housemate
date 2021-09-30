@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full">
+  <div class="h-full w-full">
     <SwitchComponent
       v-for="(s, index) in this.switches"
       :switch="s"

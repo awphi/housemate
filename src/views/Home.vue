@@ -23,44 +23,47 @@
     <small class="text-header opacity-50"
       >Welcome, {{ this.$store.state.username }}!</small
     >
-    <TabGroup>
-      <TabPanels class="flex-1 w-full pt-4 pb-4">
-        <TabPanel class="h-full"
-          ><SwitchListComponent :switches="activeHouse.switches"
-        /></TabPanel>
-        <TabPanel class="h-full"></TabPanel>
-        <TabPanel class="h-full"><SettingsComponent /></TabPanel>
-      </TabPanels>
-      <TabList class="flex space-x-8 text-header">
-        <Tab v-slot="{ selected }" as="template">
-          <a :class="[selected ? 'underline' : 'no-underline']"> Switches </a>
-        </Tab>
-        <Tab v-slot="{ selected }" as="template">
-          <a :class="[selected ? 'underline' : 'no-underline']"> Notes </a>
-        </Tab>
-        <Tab v-slot="{ selected }" as="template">
-          <a :class="[selected ? 'underline' : 'no-underline']"> Settings </a>
-        </Tab>
-      </TabList>
-    </TabGroup>
+    <Carousel class="flex flex-col w-full h-full">
+      <Slide index="1">
+        <div class="carousel__item">
+          <!-- <p class="text-2xl text-header">Switches</p> -->
+          <SwitchListComponent :switches="activeHouse.switches" />
+        </div>
+      </Slide>
+      <Slide index="2">
+        <div class="carousel__item">
+          <p class="text-2xl text-header">Notes</p>
+        </div>
+      </Slide>
+      <Slide index="3">
+        <div class="carousel__item">
+          <SettingsComponent />
+        </div>
+      </Slide>
+
+      <template #addons>
+        <Pagination />
+      </template>
+    </Carousel>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
 import { getDatabase, ref, onValue } from "firebase/database";
-import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/vue";
 import SettingsComponent from "@/components/SettingsComponent";
 import SwitchListComponent from "@/components/SwitchListComponent";
+
+import { Carousel, Pagination, Slide } from "vue3-carousel";
+
+import "vue3-carousel/dist/carousel.css";
 
 export default {
   name: "Home",
   components: {
-    TabGroup,
-    TabList,
-    Tab,
-    TabPanels,
-    TabPanel,
+    Carousel,
+    Slide,
+    Pagination,
     SettingsComponent,
     SwitchListComponent,
   },
@@ -82,6 +85,7 @@ export default {
       this.activeHouseId = id;
       this.activeHouseListener = onValue(ref(db, id), (snapshot) => {
         this.activeHouse = snapshot.val();
+        window.dispatchEvent(new Event("resize"));
       });
     },
   },
@@ -96,6 +100,9 @@ export default {
       },
     };
   },
+  mounted() {
+    document.querySelector(".carousel__pagination-item > button").click();
+  },
   created() {
     // Listen to selecting a different house so we can resub to a different firebase doc
     this.$store.subscribe((mutation) => {
@@ -109,3 +116,35 @@ export default {
   },
 };
 </script>
+
+<style>
+.carousel__prev,
+.carousel__next {
+  box-sizing: content-box;
+  border: 5px solid white;
+}
+
+.carousel__item {
+  @apply flex justify-center w-full h-full;
+}
+
+.carousel__slide {
+  padding: 10px;
+}
+
+.carousel__track {
+  @apply h-full;
+}
+
+.carousel__viewport {
+  @apply flex-1;
+}
+
+.carousel__pagination-button--active {
+  @apply bg-primary !important;
+}
+
+.carousel__pagination-button {
+  @apply bg-main;
+}
+</style>

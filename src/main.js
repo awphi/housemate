@@ -3,6 +3,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import Vue3TouchEvents from "vue3-touch-events";
 
 import "./assets/tailwind.css";
 
@@ -37,5 +38,6 @@ const appCheck = initializeAppCheck(app, {
 const app = createApp(App);
 
 app.use(store).use(router);
+app.use(Vue3TouchEvents);
 
 app.mount("#app");
