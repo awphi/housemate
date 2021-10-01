@@ -9,10 +9,7 @@ import "./assets/tailwind.css";
 import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
 import { initializeApp } from "firebase/app";
-
-if (process.env.NODE_ENV === "development") {
-  self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
-}
+import "./registerServiceWorker";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional

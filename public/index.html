@@ -8,6 +8,11 @@
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <script>
+      if ("<%= NODE_ENV %>" === "development") {
+        self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+      }
+    </script>
     <link rel="stylesheet" href="/src/assets/tailwind.css" />
     <script
       defer
