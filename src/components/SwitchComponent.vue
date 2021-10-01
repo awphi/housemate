@@ -1,15 +1,5 @@
 <template>
-  <div
-    class="
-      text-header
-      border-b-2 border-border
-      flex
-      mb-2
-      p-2
-      h-16
-      text-xl text-left
-    "
-  >
+  <div class="switch-box-base border-b-2">
     <div class="flex-1 flex justify-center flex-col">
       <p>{{ this.switch.name }}</p>
       <small v-if="this.switch.enabled" class="text-xs opacity-50">{{
@@ -21,7 +11,7 @@
       <Switch
         :checked="this.switch.enabled"
         class="switch-base w-20 h-10 relative inline-flex items-center"
-        :class="this.switch.enabled ? 'bg-green-600' : 'bg-gray-700'"
+        :class="this.switch.enabled ? 'bg-primary' : 'bg-main'"
         @click="onSwitchToggle"
       >
         <span className="sr-only">Toggle {{ this.switch.name }}</span>

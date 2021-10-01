@@ -4,7 +4,7 @@ const store = createStore({
   state: {
     houses: [],
     selectedHouse: 0,
-    username: "Anonymous Housemate",
+    username: "A Housemate",
   },
   mutations: {
     setHouses(state, houses) {

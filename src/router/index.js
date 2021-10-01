@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Welcome from "../views/Welcome.vue";
-import PageNotFound from "../views/PageNotFound.vue";
 import store from "@/store";
 
 const routes = [
@@ -28,7 +27,7 @@ const routes = [
     name: "Join",
     component: Welcome,
   },
-  { path: "/:pathMatch(.*)*", component: PageNotFound },
+  { path: "/:pathMatch(.*)*", component: Welcome },
 ];
 
 const router = createRouter({

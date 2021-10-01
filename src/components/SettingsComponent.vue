@@ -27,7 +27,7 @@
         Confirm changes
       </button>
     </div>
-    <hr class="hr-base" />
+    <div class="hr-base" />
     <button class="bg-red-600 button-base" @click="onLeaveHouseClick">
       Leave House
     </button>

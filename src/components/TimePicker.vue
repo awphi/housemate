@@ -1,7 +1,7 @@
 <template>
   <div class="w-4/5 p-6 my-8 align-middle transform bg-main rounded-2xl">
     <h1 class="text-2xl text-header">Set Timer</h1>
-    <hr class="hr-base" />
+    <div class="hr-base" />
     <scroll-picker
       class="text-header h-25 bg-main"
       :options="options"
@@ -12,7 +12,7 @@
         <div class="bg-main"></div>
       </template>
     </scroll-picker>
-    <hr class="hr-base" />
+    <div class="hr-base" />
 
     <button
       class="bg-primary rounded-md p-2 w-full text-header"
@@ -54,6 +54,7 @@ export default {
       selections: [0, 0],
     };
   },
+  emits: ["confirm"],
   components: { ScrollPicker },
 };
 </script>

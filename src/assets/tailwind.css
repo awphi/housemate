@@ -30,7 +30,7 @@ a {
 }
 
 .hr-base {
-  @apply w-full mt-4 mb-4 opacity-5;
+  @apply w-full my-4 opacity-5 border-t select-none;
 }
 
 .button-base {
@@ -55,4 +55,8 @@ a {
 
 .swiper-pagination-bullet-active {
   @apply bg-primary !important;
+}
+
+.switch-box-base {
+  @apply text-header border-border flex mb-2 p-2 h-16 text-xl text-left;
 }

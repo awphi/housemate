@@ -18,35 +18,50 @@
       <small class="text-header opacity-50"
         >Welcome to HouseMate, let's get started!</small
       >
-      <hr class="hr-base" />
+      <div class="hr-base" />
       <div class="w-full ml-1 mr-1 flex flex-col">
         <h2 class="text-left w-full text-header text-2xl">Got a house code?</h2>
         <input
           v-model="joinCode"
-          class="input-base mb-2 mt-2"
+          class="input-base mb-1 mt-2"
           placeholder="Code"
         />
-        <a
-          class="text-header text-right w-full underline"
+        <p v-if="joinCodeInvalid" class="text-red-500 text-sm">
+          Oops, that's an invalid house code!
+        </p>
+        <button
+          class="text-header self-end text-xl underline"
           @click="onJoinHouseClick"
-          >Join →</a
         >
+          Join →
+        </button>
       </div>
-      <hr class="hr-base" />
-      <div class="w-full ml-1 mr-1 flex flex-col">
+      <div class="hr-base" />
+      <div
+        class="
+          w-full
+          ml-1
+          mr-1
+          flex flex-col
+          opacity-50
+          pointer-events-none
+          select-none
+        "
+      >
         <h2 class="text-left w-full text-header text-2xl">
           Creating a new house?
         </h2>
         <input
           v-model="newHouseName"
-          class="input-base mb-2 mt-2"
+          class="input-base mb-1 mt-2"
           placeholder="House name"
         />
-        <a
-          class="text-header text-right w-full underline"
+        <button
+          class="text-header self-end text-xl underline"
           @click="onCreateHouseClick"
-          >Create →</a
         >
+          Create →
+        </button>
       </div>
     </div>
   </div>
@@ -63,7 +78,10 @@ export default {
   methods: {
     ...mapMutations(["addHouse", "selectHouse"]),
     onJoinHouseClick() {
+      this.joinCodeInvalid = false;
+
       if (this.joinCode.length == 0) {
+        this.joinCodeInvalid = true;
         return;
       }
 
@@ -78,7 +96,8 @@ export default {
             this.$router.push("/home");
           }
         } else {
-          // TODO error message
+          this.joinCodeInvalid = true;
+          this.joinCode = "";
         }
       });
     },
@@ -102,6 +121,7 @@ export default {
     return {
       newHouseName: "",
       joinCode: "",
+      joinCodeInvalid: false,
     };
   },
 };

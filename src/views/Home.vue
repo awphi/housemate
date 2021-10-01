@@ -26,13 +26,15 @@
       class="text-header opacity-50"
       >Welcome, {{ this.$store.state.username }}!</small
     >
-    <Swiper :pagination="true" class="w-full h-full">
+    <Swiper :pagination="true" class="w-full h-full pb-11">
       <SwiperSlide>
         <!-- <p class="text-2xl text-header">Switches</p> -->
         <SwitchListComponent :switches="activeHouse.switches" />
       </SwiperSlide>
       <SwiperSlide>
-        <p class="text-2xl w-full self-center text-center text-header">Notes</p>
+        <p class="text-2xl w-full self-center text-center text-header">
+          Notes coming soon...
+        </p>
       </SwiperSlide>
       <SwiperSlide>
         <SettingsComponent />
