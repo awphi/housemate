@@ -83,7 +83,7 @@ export default {
       });
     },
     onCreateHouseClick() {
-      console.log(this.newHouseName);
+      //console.log(this.newHouseName);
     },
   },
   created() {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,27 +7,43 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/img/icons/favicon-16x16.png"
+      sizes="16x16"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/img/icons/favicon-32x32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/img/icons/android-192x192.png"
+      sizes="192x192"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="/img/icons/apple-touch-icon-180x180.png"
+      sizes="180x180"
+    />
+    <meta name="msapplication-config" content="/img/icons/browserconfig.xml" />
     <script>
       if ("<%= NODE_ENV %>" === "development") {
         self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
       }
     </script>
     <link rel="stylesheet" href="/src/assets/tailwind.css" />
-    <script
-      defer
-      src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"
-      integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ"
-      crossorigin="anonymous"
-    ></script>
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>HouseMate</title>
   </head>
   <body>
     <noscript>
       <strong
-        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
-        properly without JavaScript enabled. Please enable it to
-        continue.</strong
+        >We're sorry but HouseMate doesn't work properly without JavaScript
+        enabled. Please enable it to continue.</strong
       >
     </noscript>
     <div id="modals"></div>

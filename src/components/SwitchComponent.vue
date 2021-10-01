@@ -95,7 +95,6 @@ export default {
   methods: {
     ...mapGetters(["getSelectedHouse"]),
     timerLengthConfirmed(secs) {
-      console.log("modal confirmed");
       if (secs <= 0) {
         this.isModalOpen = false;
         return;
@@ -120,7 +119,6 @@ export default {
 
       if (this.switch.timed && b) {
         this.commit = data;
-        console.log("opening modal");
         this.isModalOpen = true;
       } else {
         this.updateRemote(data);
