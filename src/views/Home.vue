@@ -32,12 +32,12 @@
         <SwitchListComponent :switches="activeHouse.switches" />
       </SwiperSlide>
       <SwiperSlide>
-        <p class="text-2xl w-full self-center text-center text-header">
-          Notes coming soon...
+        <p class="text-2xl w-full px-4 self-center text-center text-header">
+          Shared household notes coming soon...
         </p>
       </SwiperSlide>
       <SwiperSlide>
-        <SettingsComponent />
+        <SettingsComponent :activeHouse="activeHouse" />
       </SwiperSlide>
     </Swiper>
   </div>

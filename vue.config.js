@@ -2,9 +2,12 @@ module.exports = {
   pwa: {
     name: "HouseMate",
     themeColor: "#282c2d",
-    msTileColor: "#000000",
+    msTileColor: "#282c2d",
     appleMobileWebAppCapable: "yes",
-    appleMobileWebAppStatusBarStyle: "black",
+    appleMobileWebAppStatusBarStyle: "black-translucent",
+    manifestOptions: {
+      background_color: "#282c2d",
+    },
   },
   pluginOptions: {
     webpackBundleAnalyzer: {

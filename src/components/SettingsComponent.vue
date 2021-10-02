@@ -13,15 +13,34 @@
     "
   >
     <h1 class="text-header text-4xl mb-4">Settings</h1>
-    <div class="flex flex-col w-5/6">
-      <p class="text-header mb-1 whitespace-nowrap">Display Name:</p>
-      <input
-        v-model="newName"
-        class="input-base w-full"
-        placeholder="New name"
-      />
+    <div class="flex flex-col w-5/6 space-y-4">
+      <div>
+        <label for="newNameInput" class="text-header mb-1 whitespace-nowrap"
+          >Your Display Name:</label
+        >
+        <input
+          v-model="newName"
+          id="newNameInput"
+          class="input-base w-full"
+          placeholder="New name"
+        />
+      </div>
+      <div>
+        <label
+          for="newHouseNameInput"
+          class="text-header mb-1 whitespace-nowrap"
+          >House Name:</label
+        >
+        <input
+          id="newHouseNameInput"
+          v-model="newHouseName"
+          class="input-base w-full"
+          placeholder="New house name"
+        />
+      </div>
       <button
-        class="button-base mt-4 bg-primary w-fit-content self-center"
+        ref="confirmButton"
+        class="button-base bg-primary w-fit-content self-center"
         @click="onConfirmChanges"
       >
         Confirm changes
@@ -35,16 +54,30 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
+import { getDatabase, ref, update } from "firebase/database";
 
 export default {
   methods: {
+    ...mapGetters(["getSelectedHouse"]),
     ...mapMutations(["setUsername", "leaveHouse"]),
     onConfirmChanges() {
       if (this.newName.length > 0) {
         this.setUsername(this.newName);
-        this.newName = "";
       }
+
+      if (this.newHouseName.length > 0) {
+        const db = getDatabase();
+        update(ref(db, this.getSelectedHouse()), {
+          name: this.newHouseName,
+        });
+      }
+
+      const cb = this.$refs.confirmButton;
+      cb.disabled = true;
+      setTimeout(() => {
+        cb.disabled = false;
+      }, 800);
     },
     onLeaveHouseClick() {
       // TODO confirm with a modal?
@@ -54,8 +87,10 @@ export default {
   },
   data() {
     return {
-      newName: "",
+      newName: this.$store.state.username,
+      newHouseName: this.activeHouse.name,
     };
   },
+  props: ["activeHouse"],
 };
 </script>

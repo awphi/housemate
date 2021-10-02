@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full flex flex-col items-center">
-    <div class="flex-1 overflow-scroll w-full mt-4">
+    <div class="flex-1 overflow-y-auto w-full mt-4">
       <SwitchComponent
         v-for="(s, index) in this.switches"
         :switch="s"

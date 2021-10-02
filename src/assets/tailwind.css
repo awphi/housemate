@@ -37,6 +37,10 @@ a {
   @apply p-2 rounded-md text-header;
 }
 
+*:disabled {
+  @apply opacity-50 pointer-events-none select-none;
+}
+
 .switch-base {
   @apply rounded-full cursor-pointer focus:outline-none;
 }
