@@ -1,18 +1,17 @@
 <template>
   <div
     class="
-      bg-main
       p-4
       flex
       w-full
-      justify-center
+      h-full
       items-center
+      justify-center
       rounded-md
       flex-col
       self-center
     "
   >
-    <h1 class="text-header text-4xl mb-4">Settings</h1>
     <div class="flex flex-col w-5/6 space-y-4">
       <div>
         <label for="newNameInput" class="text-header mb-1 whitespace-nowrap"

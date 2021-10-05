@@ -8,42 +8,12 @@
     </div>
 
     <div class="flex flex-col">
-      <Switch
-        :checked="this.switch.enabled"
-        class="switch-base w-20 h-10 relative inline-flex items-center"
-        :class="this.switch.enabled ? 'bg-primary' : 'bg-main'"
-        @click="onSwitchToggle"
-      >
-        <span className="sr-only">Toggle {{ this.switch.name }}</span>
-        <span
-          v-if="!this.switch.timed"
-          aria-hidden="true"
-          :class="this.switch.enabled ? 'translate-x-11' : 'translate-x-1'"
-          class="h-8 w-8 rounded-full bg-white shadow-lg switch-ball-base"
-        />
-        <svg
-          v-else
-          class="h-8 w-8 switch-ball-base"
-          :class="this.switch.enabled ? 'translate-x-11' : 'translate-x-1'"
-          width="24"
-          height="24"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <circle
-            cx="12"
-            cy="12"
-            r="11"
-            stroke="currentColor"
-            stroke-width="2"
-          ></circle>
-          <path
-            stroke="currentColor"
-            stroke-width="2"
-            d="M12 5V12L16 16"
-          ></path>
-        </svg>
-      </Switch>
+      <styled-switch
+        :enabled="this.switch.enabled"
+        :timed="this.switch.timed"
+        :name="this.switch.name"
+        @toggle="onSwitchToggle"
+      />
     </div>
     <modal v-if="this.switch.timed" v-model:isOpen="isModalOpen">
       <time-picker @confirm="timerLengthConfirmed" />
@@ -52,11 +22,11 @@
 </template>
 
 <script>
-import { Switch } from "@headlessui/vue";
 import { getDatabase, ref, update } from "firebase/database";
 import { mapGetters } from "vuex";
 import TimePicker from "./TimePicker.vue";
 import Modal from "./Modal.vue";
+import StyledSwitch from "./StyledSwitch.vue";
 
 export default {
   data() {
@@ -136,9 +106,9 @@ export default {
     },
   },
   components: {
-    Switch,
     TimePicker,
     Modal,
+    StyledSwitch,
   },
   props: ["index", "switch", "now"],
 };
