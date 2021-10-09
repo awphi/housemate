@@ -34,6 +34,10 @@
 
 <script>
 import StyledSwitch from "./StyledSwitch.vue";
+
+import { getDatabase, ref, set, push } from "firebase/database";
+import { mapGetters } from "vuex";
+
 export default {
   components: { StyledSwitch },
   data() {
@@ -45,8 +49,26 @@ export default {
     };
   },
   methods: {
+    ...mapGetters(["getSelectedHouse"]),
     onConfirmed() {
       this.$emit("confirm", this.newSwitch);
+      const db = getDatabase();
+      const switchesRef = ref(db, `${this.getSelectedHouse()}/switches`);
+
+      const sw = Object.assign(
+        { enabled: false, lastEnabled: "-" },
+        this.newSwitch
+      );
+
+      if (sw.timed) {
+        Object.assign(sw, {
+          timer_length: 0,
+          timer_start: 0,
+        });
+      }
+
+      set(push(switchesRef), sw);
+
       this.newSwitch = {
         name: "",
         timed: false,

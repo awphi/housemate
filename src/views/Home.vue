@@ -37,7 +37,7 @@
         </p>
       </SwiperSlide>
       <SwiperSlide>
-        <SettingsComponent :activeHouse="activeHouse" />
+        <SettingsComponent :activeHouseName="activeHouse.name" />
       </SwiperSlide>
     </Swiper>
   </div>
@@ -83,7 +83,7 @@ export default {
       const db = getDatabase();
       this.activeHouseId = id;
       this.activeHouseListener = onValue(ref(db, id), (snapshot) => {
-        this.activeHouse = snapshot.val();
+        Object.assign(this.activeHouse, snapshot.val());
         window.dispatchEvent(new Event("resize"));
       });
     },

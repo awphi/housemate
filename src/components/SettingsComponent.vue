@@ -87,9 +87,14 @@ export default {
   data() {
     return {
       newName: this.$store.state.username,
-      newHouseName: this.activeHouse.name,
+      newHouseName: "",
     };
   },
-  props: ["activeHouse"],
+  watch: {
+    activeHouseName: function (val) {
+      this.newHouseName = val;
+    },
+  },
+  props: ["activeHouseName"],
 };
 </script>
